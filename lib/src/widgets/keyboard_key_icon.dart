@@ -41,7 +41,8 @@ class KeyboardKeyIcon extends StatelessWidget {
       child: icon != null
           ? Icon(
               icon,
-              size: controller.style.actionLabelTextStyle?.resolve({}).fontSize,
+              size:
+                  controller.style.actionLabelTextStyle?.resolve({})?.fontSize,
               color: color,
             )
           : Text(

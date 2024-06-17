@@ -58,12 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     return TextStyle(color: Colors.pink);
                   }
 
-                  return Theme.of(context)
-                      .primaryTextTheme
-                      .titleMedium!
-                      .copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      );
+                  return null;
                 }),
               ),
 

@@ -123,7 +123,8 @@ class _DefaultItem extends StatelessWidget {
     Widget label;
 
     final resolvedActionLabelTextStyle = style.actionLabelTextStyle!
-        .resolve({if (isHighlighted) WidgetState.selected});
+            .resolve({if (isHighlighted) WidgetState.selected}) ??
+        style.actionLabelTextStyle!.resolve({})!;
 
     // if highlighting the search substring is enabled, then we'll use one of the
     // two widgets for that

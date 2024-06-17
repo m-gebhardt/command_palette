@@ -182,17 +182,16 @@ class _CommandPaletteInnerState extends State<_CommandPaletteInner> {
     CommandPaletteStyle styleToCopy =
         widget.config.style ?? const CommandPaletteStyle();
 
+    final fallbackResolvedActionLabelTextStyle =
+        Theme.of(context).primaryTextTheme.titleMedium?.copyWith(
+              color: Theme.of(context).colorScheme.onSurface,
+            );
     final newActionLabelTextStyle = styleToCopy.actionLabelTextStyle ??
-        WidgetStatePropertyAll(
-            Theme.of(context).primaryTextTheme.titleMedium!.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ));
+        WidgetStatePropertyAll(fallbackResolvedActionLabelTextStyle);
 
-    TextStyle actionLabelTextStyleResolver(Set<WidgetState> states) {
-      return Theme.of(context)
-          .primaryTextTheme
-          .titleMedium!
-          .merge(newActionLabelTextStyle.resolve(states));
+    TextStyle? actionLabelTextStyleResolver(Set<WidgetState> states) {
+      final resolved = newActionLabelTextStyle.resolve(states);
+      return fallbackResolvedActionLabelTextStyle?.merge(resolved);
     }
 
     _style = CommandPaletteStyle(
@@ -222,7 +221,7 @@ class _CommandPaletteInnerState extends State<_CommandPaletteInner> {
               .applyDefaults(Theme.of(context).inputDecorationTheme),
       prefixNestedActions: styleToCopy.prefixNestedActions,
       instructionColor: styleToCopy.instructionColor ??
-          newActionLabelTextStyle.resolve({}).color?.withOpacity(.84),
+          newActionLabelTextStyle.resolve({})?.color?.withOpacity(.84),
       barrierFilter: styleToCopy.barrierFilter,
     );
 

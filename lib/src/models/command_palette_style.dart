@@ -22,7 +22,7 @@ class CommandPaletteStyle {
   ///   color: Theme.of(context).colorScheme.onSurface,
   ///  )
   /// ```
-  final WidgetStateProperty<TextStyle>? actionLabelTextStyle;
+  final WidgetStateProperty<TextStyle?>? actionLabelTextStyle;
 
   /// Text style for the parts of the label which're highlighted because of
   /// searching
