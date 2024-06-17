@@ -151,18 +151,18 @@ class CommandPaletteModal extends ModalRoute<void> {
                           height: height,
                           width: width,
                           child: Column(
-                            children: _wrapAllWithPointerIterceptor(
-                              [
-                                CommandPaletteTextField(
-                                  hintText: hintText,
-                                  onSubmit: () => commandPaletteController
-                                      .performHighlightedAction(context),
+                            children: [
+                                PointerInterceptor(
+                                  child: CommandPaletteTextField(
+                                    hintText: hintText,
+                                    onSubmit: () => commandPaletteController
+                                        .performHighlightedAction(context),
+                                  ),
                                 ),
-                                const Flexible(
-                                  child: CommandPaletteBody(),
+                                Flexible(
+                                  child: PointerInterceptor(child: const CommandPaletteBody()),
                                 ),
                               ],
-                            ),
                           ),
                         ),
                       ),
@@ -177,11 +177,6 @@ class CommandPaletteModal extends ModalRoute<void> {
     );
   }
 
-  _wrapAllWithPointerIterceptor(List<Widget> widgets) {
-    return <PointerInterceptor>[
-      for (final widget in widgets) PointerInterceptor(child: widget),
-    ];
-  }
 }
 
 // intents for the different control keys
