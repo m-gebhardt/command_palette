@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 
 import 'command_palette_text_field.dart';
 import 'options/command_palette_body.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 const Key kCommandPaletteModalKey = Key("Command Palette Modal");
 
@@ -150,16 +151,18 @@ class CommandPaletteModal extends ModalRoute<void> {
                           height: height,
                           width: width,
                           child: Column(
-                            children: [
-                              CommandPaletteTextField(
-                                hintText: hintText,
-                                onSubmit: () => commandPaletteController
-                                    .performHighlightedAction(context),
-                              ),
-                              const Flexible(
-                                child: CommandPaletteBody(),
-                              ),
-                            ],
+                            children: _wrapAllWithPointerIterceptor(
+                              [
+                                CommandPaletteTextField(
+                                  hintText: hintText,
+                                  onSubmit: () => commandPaletteController
+                                      .performHighlightedAction(context),
+                                ),
+                                const Flexible(
+                                  child: CommandPaletteBody(),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -172,6 +175,12 @@ class CommandPaletteModal extends ModalRoute<void> {
         ),
       ),
     );
+  }
+
+  _wrapAllWithPointerIterceptor(List<Widget> widgets) {
+    return <PointerInterceptor>[
+      for (final widget in widgets) PointerInterceptor(child: widget),
+    ];
   }
 }
 
