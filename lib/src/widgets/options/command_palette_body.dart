@@ -122,6 +122,9 @@ class _DefaultItem extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget label;
 
+    final resolvedActionLabelTextStyle = style.actionLabelTextStyle!
+        .resolve({if (isHighlighted) WidgetState.selected});
+
     // if highlighting the search substring is enabled, then we'll use one of the
     // two widgets for that
     if (style.highlightSearchSubstring) {
@@ -131,7 +134,7 @@ class _DefaultItem extends StatelessWidget {
           (action as MatchedCommandPaletteAction).matches != null) {
         label = OptionHighlighter(
           action: (action as MatchedCommandPaletteAction),
-          textStyle: style.actionLabelTextStyle!,
+          textStyle: resolvedActionLabelTextStyle,
           textAlign: style.actionLabelTextAlign,
           textStyleHighlight: style.highlightedLabelTextStyle!,
         );
@@ -143,7 +146,7 @@ class _DefaultItem extends StatelessWidget {
           text: action.label,
           textAlign: style.actionLabelTextAlign,
           terms: searchTerms,
-          textStyle: style.actionLabelTextStyle!,
+          textStyle: resolvedActionLabelTextStyle,
           textStyleHighlight: style.highlightedLabelTextStyle!,
         );
       }
@@ -153,7 +156,7 @@ class _DefaultItem extends StatelessWidget {
       label = Text(
         action.label,
         textAlign: style.actionLabelTextAlign,
-        style: style.actionLabelTextStyle!,
+        style: resolvedActionLabelTextStyle,
       );
     }
 

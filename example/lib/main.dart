@@ -53,6 +53,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   hintText: "Enter Something",
                   contentPadding: EdgeInsets.all(16),
                 ),
+                actionLabelTextStyle: WidgetStateProperty.resolveWith((states) {
+                  if (states.contains(WidgetState.selected)) {
+                    return TextStyle(color: Colors.pink);
+                  }
+
+                  return Theme.of(context)
+                      .primaryTextTheme
+                      .titleMedium!
+                      .copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      );
+                }),
               ),
 
               // Setting custom keyboard shortcuts

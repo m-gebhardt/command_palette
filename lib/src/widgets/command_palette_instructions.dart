@@ -107,7 +107,7 @@ class _KeyboardInstruction extends StatelessWidget {
           Flexible(
             child: Text(
               instruction,
-              style: controller.style.actionLabelTextStyle?.merge(
+              style: controller.style.actionLabelTextStyle?.resolve({}).merge(
                 TextStyle(
                   color: controller.style.instructionColor,
                 ),
