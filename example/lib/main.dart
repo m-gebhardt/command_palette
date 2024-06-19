@@ -87,6 +87,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 description: "Change the color theme of the app",
                 shortcut: ["ctrl", "t"],
                 leading: Icon(Icons.format_paint),
+                onSelect: () {
+                  print("SELECTED NESTED ACTION");
+                },
                 childrenActions: [
                   CommandPaletteAction.single(
                     label: "Light",

@@ -107,6 +107,7 @@ class CommandPaletteAction {
     required this.label,
     this.description,
     required this.childrenActions,
+    this.onSelect,
     this.shortcut,
     this.id,
     this.leading,

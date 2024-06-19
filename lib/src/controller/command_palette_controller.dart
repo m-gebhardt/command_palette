@@ -192,17 +192,23 @@ class CommandPaletteController extends ChangeNotifier {
   /// Performs the required handling for the given action
   void handleAction(BuildContext context,
       {required CommandPaletteAction action}) {
+    // nested items we set this item as the selected which in turn
+    // will display its children.
+    void setCurrentlySelectedAction(CommandPaletteAction action) {
+      currentlySelectedAction = action;
+    }
+
     if (action.actionType == CommandPaletteActionType.single) {
       action.onSelect!();
       if (Navigator.of(context).canPop()) {
         Navigator.of(context).pop();
       }
-    }
-
-    // nested items we set this item as the selected which in turn
-    // will display its children.
-    else {
-      currentlySelectedAction = action;
+    } else if (action.actionType == CommandPaletteActionType.nested &&
+        action.onSelect != null) {
+      action.onSelect!();
+      setCurrentlySelectedAction(action);
+    } else {
+      setCurrentlySelectedAction(action);
     }
   }
 
