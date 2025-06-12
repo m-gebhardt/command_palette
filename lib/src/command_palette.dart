@@ -240,23 +240,18 @@ class _CommandPaletteInnerState extends State<_CommandPaletteInner> {
       controller: widget.controller,
       child: Builder(
         builder: (context) {
-          return Shortcuts(
-            shortcuts: {
-              widget.config.openKeySet: const _OpenCommandPaletteIntent()
+          return Actions(
+            actions: {
+              OpenCommandPaletteIntent:
+                  CallbackAction<OpenCommandPaletteIntent>(
+                // ignore: body_might_complete_normally_nullable
+                onInvoke: (_) => _openCommandPalette(context),
+              )
             },
-            child: Actions(
-              actions: {
-                _OpenCommandPaletteIntent:
-                    CallbackAction<_OpenCommandPaletteIntent>(
-                  // ignore: body_might_complete_normally_nullable
-                  onInvoke: (_) => _openCommandPalette(context),
-                )
-              },
-              child: Focus(
-                focusNode: widget.focusNode,
-                autofocus: true,
-                child: widget.child,
-              ),
+            child: Focus(
+              focusNode: widget.focusNode,
+              autofocus: true,
+              child: widget.child,
             ),
           );
         },
@@ -303,6 +298,6 @@ class _CommandPaletteInnerState extends State<_CommandPaletteInner> {
   }
 }
 
-class _OpenCommandPaletteIntent extends Intent {
-  const _OpenCommandPaletteIntent();
+class OpenCommandPaletteIntent extends Intent {
+  const OpenCommandPaletteIntent();
 }

@@ -7,9 +7,6 @@ import 'package:flutter/services.dart';
 
 import '../../command_palette.dart';
 
-final _defaultOpenKeySet = SingleActivator(LogicalKeyboardKey.keyK,
-    meta: defaultTargetPlatform == TargetPlatform.macOS,
-    control: defaultTargetPlatform != TargetPlatform.macOS);
 const _defaultCloseKeySet = SingleActivator(LogicalKeyboardKey.escape);
 
 /// Configuration options for the command palette
@@ -43,11 +40,6 @@ class CommandPaletteConfig {
   /// Note for development: Changes to style while the command palette is open
   /// will require the command palette to be closed and reopened.
   final CommandPaletteStyle? style;
-
-  /// The set of keys used to open the command palette.
-  ///
-  /// Defaults to Ctrl-/Cmd- C
-  final ShortcutActivator openKeySet;
 
   /// The set of keys used to close the command palette.
   ///
@@ -118,7 +110,6 @@ class CommandPaletteConfig {
     this.showInstructions = false,
   })  : filter = filter ?? kDefaultFilter,
         builder = builder ?? kDefaultBuilder,
-        openKeySet = openKeySet ?? _defaultOpenKeySet,
         closeKeySet = closeKeySet ?? _defaultCloseKeySet;
 
   @override
@@ -132,7 +123,6 @@ class CommandPaletteConfig {
         other.transitionDuration == transitionDuration &&
         other.transitionCurve == transitionCurve &&
         other.style == style &&
-        other.openKeySet == openKeySet &&
         other.closeKeySet == closeKeySet &&
         other.top == top &&
         other.bottom == bottom &&
@@ -150,7 +140,6 @@ class CommandPaletteConfig {
         transitionDuration.hashCode ^
         transitionCurve.hashCode ^
         style.hashCode ^
-        openKeySet.hashCode ^
         closeKeySet.hashCode ^
         top.hashCode ^
         bottom.hashCode ^
